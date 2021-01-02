@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/home_fragment"
+        android:title="Inicio" />
+
+
+    <item android:title="Plantas">
+        <menu>
+            <item
+                android:id="@+id/agregar_planta_item"
+                android:title="Agregar Planta" />
+            <item
+                android:id="@+id/listar_plantas_item"
+                android:title="Ver Plantas" />
+        </menu>
+    </item>
+
+    <item android:title="Clientes">
+        <menu>
+            <item android:title="Agregar Clientes" android:id="@+id/agregar_cliente_item" />
+            <item android:title="Ver Clientes" />
+        </menu>
+    </item>
+
+    <item android:title="Detalles">
+        <menu>
+            <item android:title="Ver Deudores" />
+            <item android:title="Ver Ventas" />
+            <item android:title="Ver Falta de Stock" />
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/dialogTipoPlantaTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="15dp"
+        android:text="Ingresar un nuevo tipo de planta"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/nuevoTipoPlantaET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Tipo de planta"
+        android:inputType="textPersonName"
+        android:paddingVertical="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="15dp">
+
+        <Button
+            android:id="@+id/cancelarTipoPlantaButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/crearTipoPlantaButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Crear" />
+    </LinearLayout>
+</LinearLayout>
