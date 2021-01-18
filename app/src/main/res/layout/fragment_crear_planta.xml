@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragment.CrearPlantaFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,6 +27,31 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:id="@+id/cantidadTV"
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/cantidad_crear_planta"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/cantidadET"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/cantidad_crear_planta_hint"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +63,7 @@
                     android:layout_width="99dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="Nombre:"
+                    android:text="@string/nombre_crear_planta"
                     android:textSize="18sp" />
 
                 <EditText
@@ -45,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Nombre de la planta" />
+                    android:hint="@string/nombre_crear_planta_hint" />
             </LinearLayout>
 
             <LinearLayout
@@ -59,7 +85,7 @@
                     android:id="@+id/descripcionPlantaTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descripcion:"
+                    android:text="@string/descripcion_crear_planta"
                     android:textSize="18sp" />
 
                 <EditText
@@ -68,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Descripcion de la planta"
+                    android:hint="@string/descripcion_crear_planta_hint"
                     android:inputType="textMultiLine"
                     android:maxLines="4"
                     android:minLines="0"
@@ -87,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="right|center_vertical"
-                    android:text="Tipo:"
+                    android:text="@string/tipo_crear_planta"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -112,21 +138,21 @@
                 android:paddingVertical="15dp">
 
                 <TextView
-                    android:id="@+id/cantidadTV"
+                    android:id="@+id/precioTV"
                     android:layout_width="114dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="Cantidad:"
+                    android:text="@string/precio_crear_planta"
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/cantidadET"
+                    android:id="@+id/precioET"
                     android:layout_width="232dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Cantidad"
+                    android:hint="@string/precio_crear_planta_hint"
                     android:inputType="textPersonName" />
             </LinearLayout>
         </LinearLayout>
@@ -138,7 +164,7 @@
             android:layout_marginStart="144dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="145dp"
-            android:text="Confirmar"
+            android:text="@string/confirmar_crear_planta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plantaImageView" />
@@ -165,7 +191,7 @@
             android:layout_marginStart="91dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="91dp"
-            android:text="Agregar Foto"
+            android:text="@string/agregar_foto_crear_planta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

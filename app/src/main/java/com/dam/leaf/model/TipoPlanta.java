@@ -1,5 +1,7 @@
 package com.dam.leaf.model;
 
+import android.widget.Filter;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

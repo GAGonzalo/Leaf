@@ -1,46 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView5"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/verPlantasCardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="5dp"
-        android:background="#6C6B6B"
-        android:foreground="@drawable/asd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="245dp"
+        android:layout_marginVertical="5dp"
+        app:cardBackgroundColor="#00FFFFFF">
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_card_style"
-        android:text="Vender"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CACTUS DE LA WEA"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="16dp" />
+            <ImageView
+                android:id="@+id/planta_img_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#6C6B6B"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/asd" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="127dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="128dp"
+                android:background="@drawable/rounded_container"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/planta_img_view"
+                app:layout_constraintStart_toStartOf="@+id/planta_img_view"
+                app:layout_constraintTop_toTopOf="@+id/planta_img_view">
+
+                <TextView
+                    android:id="@+id/titulo_planta_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#65B35F" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="378dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/rounded_container"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/planta_img_view"
+                app:layout_constraintEnd_toEndOf="@+id/planta_img_view"
+                app:layout_constraintStart_toStartOf="@+id/planta_img_view">
+
+                <TextView
+                    android:id="@+id/precio_card_text"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:text="@string/precio"
+                    android:textColor="#65B35F"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/valor_planta_card_text"
+                    android:layout_width="88dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#65B35F"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/detalles_planta_card_btn"
+                    android:layout_width="88dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/btn_card_style"
+                    android:text="@string/detalles"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/agregar_planta_card_btn"
+                    android:layout_width="88dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/btn_card_style"
+                    android:text="@string/agregar"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cantidad_card"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/cantidad_text_rounded_card"
+                android:gravity="center_horizontal|center_vertical"
+                android:paddingHorizontal="3dp"
+                android:paddingVertical="3dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="#27F305"
+                android:textSize="12sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

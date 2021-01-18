@@ -112,6 +112,7 @@ public class ClientesRepository {
         private ClientesDao clientesDao;
 
 
+
         public ActualizarClientes(ClientesDao clientesDao) {
             this.clientesDao = clientesDao;
         }
@@ -120,6 +121,12 @@ public class ClientesRepository {
         protected Void doInBackground(Cliente... clientes) {
             clientesDao.update(clientes[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
         }
     }
 

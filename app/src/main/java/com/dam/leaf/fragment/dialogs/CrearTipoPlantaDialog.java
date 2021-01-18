@@ -1,4 +1,4 @@
-package com.dam.leaf.fragment;
+package com.dam.leaf.fragment.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,8 +19,8 @@ import com.dam.leaf.repository.TipoPlantasRepository;
 
 import java.util.List;
 
-public class TipoPlantaDialogFragment extends DialogFragment implements TipoPlantasRepository.OnResultCallback<TipoPlanta> {
-    private NoticeDialogListener listener;
+public class CrearTipoPlantaDialog extends DialogFragment implements TipoPlantasRepository.OnResultCallback<TipoPlanta> {
+    private CrearTipoPlantaListener listener;
 
     @NonNull
     @Override
@@ -31,7 +31,7 @@ public class TipoPlantaDialogFragment extends DialogFragment implements TipoPlan
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.tipoplanta_layout, null);
+        View view = inflater.inflate(R.layout.dialog_new_tipoplanta, null);
         builder.setView(view);
 
         EditText tipoPlantaTextView = view.findViewById(R.id.nuevoTipoPlantaET);
@@ -70,12 +70,12 @@ public class TipoPlantaDialogFragment extends DialogFragment implements TipoPlan
     }
 
 
-    public interface NoticeDialogListener {
+    public interface CrearTipoPlantaListener {
         public void onDialogPositiveClick(List<TipoPlanta> result);
         public void onDialogNegativeClick();
     }
 
-    public void setListener(NoticeDialogListener listener) {
+    public void setListener(CrearTipoPlantaListener listener) {
         this.listener = listener;
     }
 }

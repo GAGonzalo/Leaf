@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface PlantasDao {
     @Insert
-    void insert(Planta planta);
+    long insert(Planta planta);
 
     @Delete
     void delete(Planta planta);

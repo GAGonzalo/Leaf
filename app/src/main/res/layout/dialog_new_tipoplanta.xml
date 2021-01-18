@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingVertical="15dp"
-        android:text="Ingresar un nuevo tipo de planta"
+        android:text="@string/titulo_dialog_tipo_planta"
         android:textSize="18sp" />
 
     <EditText
@@ -20,7 +20,7 @@
         android:layout_marginHorizontal="15dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Tipo de planta"
+        android:hint="@string/tipo_de_planta_dialog_tipo_planta"
         android:inputType="textPersonName"
         android:paddingVertical="15dp" />
 
@@ -38,7 +38,7 @@
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Cancelar" />
+            android:text="@string/cancelar_dialog_tipo_planta" />
 
         <Button
             android:id="@+id/crearTipoPlantaButton"
@@ -47,6 +47,6 @@
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Crear" />
+            android:text="@string/crear_dialog_tipo_planta" />
     </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
+    android:textAlignment="center">
+
+    <Button
+        android:id="@+id/buscarClienteBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/buscar_cliente_carrito" />
+
+    <EditText
+        android:id="@+id/nombre_cliente_carrito"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="@string/nombre_carrito"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/dni_cliente_carrito"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="@string/dni_carrito"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/tel_cliente_carrito"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="@string/telefono_carrito"
+        android:inputType="textPersonName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carrito_recycler"
+        android:layout_width="350dp"
+        android:layout_height="183dp"
+        android:layout_marginVertical="10dp" />
+
+    <TextView
+        android:id="@+id/total_carrito"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/total_carrito"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/importe_carrito"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:ems="10"
+        android:hint="@string/importe_carrito"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/venderButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="@string/realizar_venta_carrito" />
+</LinearLayout>

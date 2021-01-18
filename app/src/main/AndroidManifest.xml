@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.dam.leaf.activities.CarritoActivity"/>
+        <activity android:name="com.dam.leaf.activities.BuscarClienteActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

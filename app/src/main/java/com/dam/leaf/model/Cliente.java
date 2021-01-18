@@ -3,8 +3,10 @@ package com.dam.leaf.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private Long id;
     private String nombre_apellido;

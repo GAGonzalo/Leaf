@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -29,11 +31,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dam.leaf.R;
+import com.dam.leaf.fragment.dialogs.CrearTipoPlantaDialog;
 import com.dam.leaf.model.Planta;
 import com.dam.leaf.model.TipoPlanta;
 import com.dam.leaf.repository.PlantasRepository;
 import com.dam.leaf.repository.TipoPlantasRepository;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +49,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 
-public class CrearPlantaFragment extends Fragment implements PlantasRepository.OnResultCallback<Planta>, TipoPlantaDialogFragment.NoticeDialogListener,TipoPlantasRepository.OnResultCallback<TipoPlanta> {
+public class CrearPlantaFragment extends Fragment implements PlantasRepository.OnResultCallback<Planta>, CrearTipoPlantaDialog.CrearTipoPlantaListener,TipoPlantasRepository.OnResultCallback<TipoPlanta> {
 
     private static String TAG = "CREAR PLANTA FRAGMENT";
     static final int CAMARA_REQUEST = 1;
@@ -49,9 +57,13 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
     private EditText nombrePlanta;
     private EditText descripcion;
+    private EditText precio;
     private EditText cantidad;
     private Spinner tipoPlantaSpinner;
     private ImageView imageView;
+
+    private FirebaseStorage storage;
+    private byte[] image;
 
 
     public CrearPlantaFragment() {
@@ -73,6 +85,8 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        storage = FirebaseStorage.getInstance();
+
         PlantasRepository plantasRepository = new PlantasRepository(getActivity().getApplication(),this);
         TipoPlantasRepository tipoPlantasRepository = new TipoPlantasRepository(getActivity().getApplication(),this);
         tipoPlantasRepository.findAllTipoPlantas();
@@ -82,30 +96,31 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
         tipoPlantaSpinner = view.findViewById(R.id.tipoPlantaSpinner);
         imageView = view.findViewById(R.id.plantaImageView);
         cantidad = view.findViewById(R.id.cantidadET);
+        precio = view.findViewById(R.id.precioET);
         Button agregarFoto = view.findViewById(R.id.fotoButton);
         Button confirmar = view.findViewById(R.id.confirmarPlantaButton);
         ImageButton agregarTipoPlanta = view.findViewById(R.id.addTipoPlantaButton);
 
-      /*  ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.listaTipos,R.layout.support_simple_spinner_dropdown_item);
-        tipoPlantaSpinner.setAdapter(arrayAdapter);*/
 
 
 
         agregarFoto.setOnClickListener(v->{
-            Log.d(TAG,"AGREGAR FOTO APRETADO");
             crearTipoMultimediaDialog();
 
         });
 
         confirmar.setOnClickListener(v->{
             if(camposCompletos()){
-                Planta planta = new Planta(null,nombrePlanta.getText().toString(),descripcion.getText().toString(),tipoPlantaSpinner.getSelectedItem().toString(),Integer.valueOf(cantidad.getText().toString()));
+                Planta planta = new Planta(null,nombrePlanta.getText().toString(),descripcion.getText().toString(),tipoPlantaSpinner.getSelectedItem().toString(),Integer.valueOf(cantidad.getText().toString()),Float.valueOf(precio.getText().toString()));
                 plantasRepository.insertPlanta(planta);
-                Log.d(TAG,planta.toString());
+                clearData();
+               getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
+                Toast.makeText(this.getActivity(), "Planta creada con éxito.", Toast.LENGTH_LONG).show();
+
+
             }
             else {
-                plantasRepository.findAllPlantas();
-                Toast.makeText(getActivity(), "No se creo la planta", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Complete todos los datos para crear una nueva planta.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -118,15 +133,46 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
     }
 
+    private void subirFoto(Long resultId) {
+
+
+        // Creamos una referencia a nuestro Storage
+        StorageReference storageRef = storage.getReference();
+
+        // Creamos una referencia a 'images/planta_id.jpg'
+        StorageReference platosImagesRef = storageRef.child("images/planta_"+resultId+".jpg");
+
+        UploadTask uploadTask = platosImagesRef.putBytes(image);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
+            }
+
+            // Continuamos con la tarea para obtener la URL
+            return platosImagesRef.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // URL de descarga del archivo
+                Uri downloadUri = task.getResult();
+                Log.d(TAG, downloadUri.toString());
+            } else {
+                // Fallo
+                Log.d(TAG, "- Error subiendo la foto");
+            }
+        });
+
+    }
+
     private void crearDialogNuevoTipoPlanta() {
-        TipoPlantaDialogFragment newFragment = new TipoPlantaDialogFragment();
+        CrearTipoPlantaDialog newFragment = new CrearTipoPlantaDialog();
         newFragment.setListener(this);
         newFragment.show(getActivity().getSupportFragmentManager(), "TipoPlanta");
     }
 
 
     private boolean camposCompletos() {
-        if(tipoPlantaSpinner.getSelectedItem()==null || cantidad.getText().toString().isEmpty() || nombrePlanta.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty()){
+        if(tipoPlantaSpinner.getSelectedItem()==null || cantidad.getText().toString().isEmpty() || nombrePlanta.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || !imageView.getDrawable().isVisible()){
             return false;
         }
         else {
@@ -168,7 +214,7 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
         }
     }
 
-    byte[] image;
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -220,15 +266,19 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
     }
 
 
-
-
     public void onResult(List<Planta> result) {
-        System.out.println(result);
     }
 
     @Override
     public void onResult(Planta result) {
 
+    }
+
+    @Override
+    public void onResult(Long result) {
+        if(imageView.getDrawable().isVisible()){
+            subirFoto(result);
+        }
     }
 
     @Override
@@ -238,7 +288,6 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
     @Override
     public void onDialogNegativeClick() {
-        System.out.println("negativo");
 
     }
 
@@ -261,6 +310,12 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, list );
         tipoPlantaSpinner.setAdapter(arrayAdapter);
-        System.out.println("positivo");
     }
+
+  private void clearData(){
+        cantidad.setText("");
+        nombrePlanta.setText("");
+        descripcion.setText("");
+        precio.setText("");
+  }
 }

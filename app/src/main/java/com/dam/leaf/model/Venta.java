@@ -1,9 +1,18 @@
 package com.dam.leaf.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.sql.Date;
 import java.util.List;
 
+@Entity
 public class Venta {
+    @PrimaryKey
     private Long id;
     private List<Planta> pedido;
     private Cliente cliente;
@@ -56,5 +65,42 @@ public class Venta {
                 ", cliente=" + cliente +
                 ", fecha_venta=" + fecha_venta +
                 '}';
+    }
+
+    public static class PlantasConverter {
+        @TypeConverter
+        public List<Planta> fromString(String listString){
+            return new Gson().fromJson(listString, new TypeToken<List<Planta>>() {}.getType());
+        }
+
+        @TypeConverter
+        public String saveList(List<Planta> listOfPlatos) {
+            return new Gson().toJson(listOfPlatos);
+        }
+
+    }
+    public static class ClienteConverter {
+        @TypeConverter
+        public Cliente fromString(String cliente){
+            return new Gson().fromJson(cliente, new TypeToken<Cliente>() {}.getType());
+        }
+
+        @TypeConverter
+        public String saveCliente(Cliente cliente) {
+            return new Gson().toJson(cliente);
+        }
+
+    }
+    public static class DateConverter {
+        @TypeConverter
+        public Date fromString(String date){
+            return new Gson().fromJson(date, new TypeToken<Date>() {}.getType());
+        }
+
+        @TypeConverter
+        public String saveDate(Date date) {
+            return new Gson().toJson(date);
+        }
+
     }
 }

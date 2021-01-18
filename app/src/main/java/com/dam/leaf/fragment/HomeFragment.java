@@ -1,5 +1,6 @@
 package com.dam.leaf.fragment;
 
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,8 +10,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dam.leaf.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
@@ -33,5 +39,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date date = new Date();
+        String fecha = formatter.format(date);
+        TextView textView = view.findViewById(R.id.textview_fechaActual);
+        textView.setText(fecha);
+
     }
+
 }

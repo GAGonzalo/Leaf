@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923507768941",
+    "project_id": "leaf-44c0b",
+    "storage_bucket": "leaf-44c0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923507768941:android:121988ac43ef00750d0964",
+        "android_client_info": {
+          "package_name": "com.dam.leaf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923507768941-r255hm7lapqpg8iq23c16skmu7tb1fd3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZGO4A09aLBhm-CdsvfYCL08GJdrPFQvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923507768941-r255hm7lapqpg8iq23c16skmu7tb1fd3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

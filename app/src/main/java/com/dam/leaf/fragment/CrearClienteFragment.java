@@ -85,7 +85,6 @@ public class CrearClienteFragment<ClienteRepository> extends Fragment implements
             if(camposCompletos()){
                 Cliente cliente = new Cliente(null,nombreET.getText().toString(), numeroET.getText().toString(), dniET.getText().toString(), direccion.getText().toString() );
                 clientesRepository.insertCliente(cliente);
-                System.out.println(cliente);
             }
             else {
                 clientesRepository.findAllClientes();
@@ -96,12 +95,7 @@ public class CrearClienteFragment<ClienteRepository> extends Fragment implements
 
     private boolean camposCompletos() {
 
-        System.out.println("1"+ nombreET.getText().toString().isEmpty());
-        System.out.println("2"+numeroET.getText().toString().isEmpty());
-        System.out.println("3"+dniET.getText().toString().isEmpty());
-        System.out.println("4"+direccion.getText().toString().isEmpty());
         boolean valor = (nombreET.getText().toString().isEmpty() || numeroET.getText().toString().isEmpty() || dniET.getText().toString().isEmpty() || direccion.getText().toString().isEmpty());
-        System.out.println(valor);
         if(valor){
             return false;
         }
@@ -179,11 +173,12 @@ public class CrearClienteFragment<ClienteRepository> extends Fragment implements
 
     @Override
     public void onResult(List<Cliente> result) {
-        System.out.println(result);
     }
 
     @Override
     public void onResult(Cliente result) {
 
     }
+
+
 }

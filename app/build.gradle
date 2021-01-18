@@ -1,13 +1,12 @@
 plugins {
     id 'com.android.application'
 }
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.leaf"
+        applicationId "com.dam.leaf"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
@@ -27,6 +26,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+//
 
 dependencies {
 
@@ -48,4 +49,17 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     androidTestImplementation 'androidx.room:room-testing:2.2.5'
 
+    //GSON
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+    // Declare the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
+    // Declare the dependency for the Firebase Authentication library
+    implementation 'com.google.firebase:firebase-auth'
+
 }
+apply plugin: 'com.google.gms.google-services'

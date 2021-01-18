@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 
 import com.dam.leaf.dao.AppDb;
 import com.dam.leaf.dao.PlantasDao;
-import com.dam.leaf.dao.PlantasDao;
-import com.dam.leaf.model.Planta;
 import com.dam.leaf.model.Planta;
 
 import java.util.List;
@@ -25,6 +23,7 @@ public class PlantasRepository {
     public interface OnResultCallback<T>{
         void onResult(List<T> result);
         void onResult(T result);
+        void onResult(Long result);
     }
 
     public void insertPlanta(Planta planta){
@@ -48,7 +47,7 @@ public class PlantasRepository {
     }
 
 
-    private class InsertarPlanta extends AsyncTask<Planta,Void,Void> {
+    private class InsertarPlanta extends AsyncTask<Planta,Void,Long> {
 
 
         private PlantasDao plantasDao;
@@ -59,9 +58,15 @@ public class PlantasRepository {
 
 
         @Override
-        protected Void doInBackground(Planta... plantas) {
-            plantasDao.insert(plantas[0]);
-            return null;
+        protected Long doInBackground(Planta... plantas) {
+            long id = plantasDao.insert(plantas[0]);
+            return id;
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            callback.onResult(aLong);
+            super.onPostExecute(aLong);
         }
     }
 

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="Fecha Actual:"
+                android:text="@string/fecha_home"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="Deudores:"
+                android:text="@string/deudores_home"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="Falta de Stock:"
+                android:text="@string/falta_de_stock_home"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
@@ -69,12 +69,12 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textview_fechaActual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="23/07/20"
+                android:text="@string/fecha_value_home"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="4 deudores"
+                android:text="TO DO"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
 
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:padding="3dp"
-                android:text="5 productos"
+                android:text="TO DO"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="22sp" />
         </LinearLayout>

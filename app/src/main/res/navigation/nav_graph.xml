@@ -8,10 +8,38 @@
         android:id="@+id/homeFragment"
         android:name="com.dam.leaf.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_crearPlantaFragment"
+            app:destination="@id/crearPlantaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_verPlantasFragment"
+            app:destination="@id/verPlantasFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_buscarClienteFragment"
+            app:destination="@id/buscarClienteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_crearClienteFragment"
+            app:destination="@id/crearClienteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/crearPlantaFragment"
         android:name="com.dam.leaf.fragment.CrearPlantaFragment"
         android:label="fragment_crear_planta"
         tools:layout="@layout/fragment_crear_planta" />
+    <fragment
+        android:id="@+id/buscarClienteFragment"
+        android:name="com.dam.leaf.fragment.BuscarClienteFragment"
+        android:label="fragment_buscar_cliente" />
+    <fragment
+        android:id="@+id/crearClienteFragment"
+        android:name="com.dam.leaf.fragment.CrearClienteFragment"
+        android:label="fragment_crear_cliente" />
+    <fragment
+        android:id="@+id/verPlantasFragment"
+        android:name="com.dam.leaf.fragment.VerPlantasFragment"
+        android:label="fragment_ver_plantas">
+
+    </fragment>
+
 </navigation>
