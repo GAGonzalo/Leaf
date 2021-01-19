@@ -118,7 +118,6 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
     @Override
     public void onBackPressed() {
 
-        System.out.println("back");
 
         Intent intent = new Intent();
         intent.putExtra("Pedido",pedido);

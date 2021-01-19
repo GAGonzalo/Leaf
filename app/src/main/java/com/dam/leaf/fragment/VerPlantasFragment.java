@@ -60,7 +60,6 @@ public class VerPlantasFragment extends Fragment implements PlantasRepository.On
 
         if(getArguments()!=null){
             vender=getArguments().getBoolean("Vender");
-            System.out.println(vender);
         }
 
         return inflater.inflate(R.layout.fragment_ver_plantas,container,false);
