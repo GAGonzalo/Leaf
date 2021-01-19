@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -41,7 +39,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +110,7 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
             if(camposCompletos()){
                 Planta planta = new Planta(null,nombrePlanta.getText().toString(),descripcion.getText().toString(),tipoPlantaSpinner.getSelectedItem().toString(),Integer.valueOf(cantidad.getText().toString()),Float.valueOf(precio.getText().toString()));
                 plantasRepository.insertPlanta(planta);
-                clearData();
+                clearForms();
                getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
                 Toast.makeText(this.getActivity(), "Planta creada con éxito.", Toast.LENGTH_LONG).show();
 
@@ -135,8 +132,6 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
     private void subirFoto(Long resultId) {
 
-
-        // Creamos una referencia a nuestro Storage
         StorageReference storageRef = storage.getReference();
 
         // Creamos una referencia a 'images/planta_id.jpg'
@@ -172,7 +167,11 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
 
 
     private boolean camposCompletos() {
-        if(tipoPlantaSpinner.getSelectedItem()==null || cantidad.getText().toString().isEmpty() || nombrePlanta.getText().toString().isEmpty() || descripcion.getText().toString().isEmpty() || !imageView.getDrawable().isVisible()){
+        if(tipoPlantaSpinner.getSelectedItem()==null ||
+                cantidad.getText().toString().isEmpty() ||
+                nombrePlanta.getText().toString().isEmpty() ||
+                descripcion.getText().toString().isEmpty() ||
+                !imageView.getDrawable().isVisible()){
             return false;
         }
         else {
@@ -312,7 +311,7 @@ public class CrearPlantaFragment extends Fragment implements PlantasRepository.O
         tipoPlantaSpinner.setAdapter(arrayAdapter);
     }
 
-  private void clearData(){
+  private void clearForms(){
         cantidad.setText("");
         nombrePlanta.setText("");
         descripcion.setText("");

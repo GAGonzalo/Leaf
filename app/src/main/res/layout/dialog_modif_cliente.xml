@@ -50,7 +50,7 @@
             android:layout_marginHorizontal="5dp"
             android:ems="10"
             android:hint="@string/numero_de_telefono_dialog"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
     </LinearLayout>
     <Button
         android:id="@+id/eliminar_modif_cliente"

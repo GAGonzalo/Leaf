@@ -87,10 +87,11 @@ public class VerPlantasFragment extends Fragment implements PlantasRepository.On
         }
 
         fbtn.setOnClickListener(v->{
-            if(list.size()>0){
+            if(pedido.size()>0){
                 Intent intent = new Intent(getActivity(), CarritoActivity.class);
                 intent.putExtra("Pedido",pedido);
-                startActivity(intent);
+                startActivityForResult(intent,32);
+
             }
             else{
                 Toast.makeText(getActivity(), "Elegir almenos un producto", Toast.LENGTH_SHORT).show();
@@ -111,11 +112,17 @@ public class VerPlantasFragment extends Fragment implements PlantasRepository.On
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data!= null){
+            pedido= (ArrayList<Planta>) data.getExtras().get("Pedido");
+        }
+    }
 
     @Override
     public void onResult(List<Planta> result) {
-        list = result;
-        configPlantasAdapter(list);
+        list = result;        configPlantasAdapter(list);
     }
     @Override
     public void onResult(Planta result) {

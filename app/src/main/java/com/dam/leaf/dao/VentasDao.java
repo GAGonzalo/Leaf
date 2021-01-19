@@ -26,4 +26,7 @@ public interface VentasDao {
 
     @Query("SELECT * FROM venta")
     List<Venta> getAll();
+
+    @Query("SELECT * FROM venta WHERE (pago >= total)")
+    List<Venta> getPagosCompletos();
 }

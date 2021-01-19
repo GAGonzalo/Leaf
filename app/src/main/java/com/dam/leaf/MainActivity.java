@@ -20,6 +20,7 @@ import com.dam.leaf.fragment.CrearClienteFragment;
 import com.dam.leaf.fragment.CrearPlantaFragment;
 import com.dam.leaf.fragment.HomeFragment;
 import com.dam.leaf.fragment.VerPlantasFragment;
+import com.dam.leaf.fragment.VerVentasFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -95,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.ver_clientes_item:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new BuscarClienteFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.ver_ventas_item:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new VerVentasFragment()).addToBackStack(null).commit();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

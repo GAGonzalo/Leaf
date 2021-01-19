@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CarritoActivity extends AppCompatActivity implements VentasRepository.OnResultCallback<Venta>,PlantasRepository.OnResultCallback<Planta> {
+public class CarritoActivity extends AppCompatActivity implements VentasRepository.OnResultCallback<Venta>,PlantasRepository.OnResultCallback<Planta>, CarritoAdapter.OnRemoveCallback {
 
     private ArrayList<Planta> pedido;
     private Cliente cliente;
@@ -42,6 +43,7 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
     private EditText importe;
     private Button venderBtn;
 
+    private float total;
     private VentasRepository ventasRepository;
     private PlantasRepository plantasRepository;
 
@@ -49,6 +51,8 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_carrito);
+
+        total=0;
 
         ventasRepository = new VentasRepository(getApplication(),this);
         plantasRepository = new PlantasRepository(getApplication(),this);
@@ -63,13 +67,14 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
         importe = findViewById(R.id.importe_carrito);
         venderBtn = findViewById(R.id.venderButton);
 
+
         layoutManager = new LinearLayoutManager(this);
-        mAdapter = new CarritoAdapter(pedido,this);
+        mAdapter = new CarritoAdapter(pedido,this,this);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        float total=0;
+
 
         for(Planta p : pedido){
             total+=p.getPrecio();
@@ -77,6 +82,8 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
         precioTotal.setText(String.valueOf(total));
 
         Button buscarClienteButton = findViewById(R.id.buscarClienteBtn);
+
+
 
         buscarClienteButton.setOnClickListener(v->{
             Intent intent = new Intent(this,BuscarClienteActivity.class);
@@ -87,17 +94,37 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
 
         venderBtn.setOnClickListener(v->{
             Date date = new Date(System.currentTimeMillis());
-            Venta venta = new Venta(null,pedido,cliente,date);
+            Venta venta = new Venta(null,pedido,total,Float.valueOf(importe.getText().toString()),cliente,date);
             ventasRepository.insertVenta(venta);
 
+
+            // Remuevo los repetidos de la lista de pedidos, ya que,
+            // la lista viene con las plantas y la cantidad de stock
+            // que le quedaria luego de la venta y asi despues updatear
+            // en la base de datos la cantidad de stock
+
             ArrayList<Planta> list = removerRepetidos();
+
             for(Planta p : list){
                 plantasRepository.updatePlanta(p);
             }
-
+            Toast.makeText(this, "Venta realizada.", Toast.LENGTH_LONG).show();
             finish();
 
+
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        System.out.println("back");
+
+        Intent intent = new Intent();
+        intent.putExtra("Pedido",pedido);
+        setResult(RESULT_OK,intent);
+        finish();
+        super.onBackPressed();
     }
 
     private ArrayList<Planta> removerRepetidos(){
@@ -116,12 +143,12 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        cliente = (Cliente) data.getExtras().get("Cliente");
-
-        nombre.setText(cliente.getNombre_apellido());
-        dni.setText(cliente.getDni());
-        tel.setText(cliente.getNumero_telefono());
+            if(data!= null){
+                cliente = (Cliente) data.getExtras().get("Cliente");
+                nombre.setText(cliente.getNombre_apellido());
+                dni.setText(cliente.getDni());
+                tel.setText(cliente.getNumero_telefono());
+            }
 
     }
 
@@ -147,6 +174,14 @@ public class CarritoActivity extends AppCompatActivity implements VentasReposito
 
     @Override
     public void onResult(Long result) {
+
+    }
+
+    @Override
+    public void onRemove(Planta p) {
+        total -= p.getPrecio();
+        precioTotal.setText(String.valueOf(total));
+        pedido.remove(p);
 
     }
 }

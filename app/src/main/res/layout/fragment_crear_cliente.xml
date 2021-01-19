@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/dni_crear_cliente"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingVertical="20dp"
             tools:layout_editor_absoluteX="71dp"
             tools:layout_editor_absoluteY="345dp" />
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/tel_crear_cliente"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingVertical="20dp"
             tools:layout_editor_absoluteX="71dp"
             tools:layout_editor_absoluteY="409dp" />

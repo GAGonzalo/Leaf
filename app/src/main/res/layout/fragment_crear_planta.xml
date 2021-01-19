@@ -153,7 +153,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/precio_crear_planta_hint"
-                    android:inputType="textPersonName" />
+                    android:inputType="numberDecimal" />
             </LinearLayout>
         </LinearLayout>
 

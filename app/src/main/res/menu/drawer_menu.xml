@@ -29,18 +29,24 @@
         <menu>
             <item android:title="@string/agregar_clientes"
                 android:id="@+id/agregar_cliente_item"
-                android:icon="@drawable/ic_baseline_add_24"/>
+                android:icon="@drawable/ic_baseline_person_add_alt_1_24"/>
             <item android:title="@string/ver_clientes"
                 android:id="@+id/ver_clientes_item"
-                android:icon="@drawable/ic_baseline_search_24"/>
+                android:icon="@drawable/ic_baseline_person_search_24"/>
         </menu>
     </item>
 
     <item android:title="@string/detalles_drawer">
         <menu>
-            <item android:title="Ver Deudores (to do)" />
-            <item android:title="Ver Ventas (to do)" />
-            <item android:title="Ver Falta de Stock (to do)" />
+            <item android:title="Ver Ventas"
+                android:id="@+id/ver_ventas_item"
+                android:icon="@drawable/ic_baseline_list_24"/>
+            <item android:title="Ver Deudores (to do)"
+                android:icon="@drawable/ic_baseline_block_24"/>
+
+            <item android:title="Ver Falta de Stock (to do)"
+                android:icon="@drawable/ic_baseline_block_24"/>
+
         </menu>
     </item>
 </menu>

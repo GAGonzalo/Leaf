@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="3dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="3dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
     </LinearLayout>
 
     <Button

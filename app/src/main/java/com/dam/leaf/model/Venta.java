@@ -15,14 +15,35 @@ public class Venta {
     @PrimaryKey
     private Long id;
     private List<Planta> pedido;
+    private Float total;
+    private Float pago;
     private Cliente cliente;
     private Date fecha_venta;
 
-    public Venta(Long id, List<Planta> pedido, Cliente cliente, Date fecha_venta) {
+
+    public Venta(Long id, List<Planta> pedido, Float total, Float pago, Cliente cliente, Date fecha_venta) {
         this.id = id;
         this.pedido = pedido;
+        this.total = total;
+        this.pago = pago;
         this.cliente = cliente;
         this.fecha_venta = fecha_venta;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public Float getPago() {
+        return pago;
+    }
+
+    public void setPago(Float pago) {
+        this.pago = pago;
     }
 
     public Long getId() {

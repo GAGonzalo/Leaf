@@ -30,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/asd" />
+                app:srcCompat="@drawable/default_planta_img" />
 
             <LinearLayout
                 android:id="@+id/linearLayout7"

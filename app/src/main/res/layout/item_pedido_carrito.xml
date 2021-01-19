@@ -26,5 +26,14 @@
             android:layout_weight="1"
             android:text="@string/precio_item_carrito"
             android:textAlignment="viewEnd" />
+
+        <Button
+            android:id="@+id/borrar_item_carritoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Borrar"
+            android:textSize="11sp" />
     </LinearLayout>
 </LinearLayout>

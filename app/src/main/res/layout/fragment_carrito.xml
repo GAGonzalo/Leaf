@@ -32,7 +32,7 @@
         android:ems="10"
         android:enabled="false"
         android:hint="@string/dni_carrito"
-        android:inputType="textPersonName" />
+        android:inputType="numberSigned" />
 
     <EditText
         android:id="@+id/tel_cliente_carrito"
@@ -42,7 +42,7 @@
         android:ems="10"
         android:enabled="false"
         android:hint="@string/telefono_carrito"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/carrito_recycler"
@@ -65,7 +65,7 @@
         android:layout_marginVertical="10dp"
         android:ems="10"
         android:hint="@string/importe_carrito"
-        android:inputType="textPersonName" />
+        android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/venderButton"

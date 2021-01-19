@@ -106,7 +106,7 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.PlantaVi
             crearDialog(planta);
         });
 
-   //     cargarFoto(holder.imageView,planta.getId());
+       cargarFoto(holder.imageView,planta.getId());
 
     }
 
@@ -189,7 +189,7 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.PlantaVi
             else{
                 String filterPattern = constraint.toString().toLowerCase().trim();
                 for(Planta p : plantaFullList){
-                    if(p.getNombre().contains(filterPattern) &&  (p.getTipo().equals(tipo) || tipo.equals("Ningun Tipo"))){
+                    if(p.getNombre().toLowerCase().contains(filterPattern) &&  (p.getTipo().equals(tipo) || tipo.equals("Ningun Tipo"))){
                         filteredList.add(p);
                     }
                 }
@@ -209,7 +209,6 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.PlantaVi
             notifyDataSetChanged();
         }
     };
-
 
 
 

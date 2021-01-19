@@ -45,6 +45,10 @@ public class VentasRepository {
         new VentasRepository.BorrarVenta(ventasDao).execute(venta);
     }
 
+    public void findVentasCompletas(){
+        new VentasRepository.BuscarVentasCompletas(ventasDao,callback).execute();
+    }
+
 
     private class InsertarVenta extends AsyncTask<Venta,Void,Void> {
 
@@ -135,4 +139,27 @@ public class VentasRepository {
             return null;
         }
     }
+
+    private class BuscarVentasCompletas extends AsyncTask<Void,Void,List<Venta>> {
+
+        private VentasDao ventasDao;
+        private VentasRepository.OnResultCallback callback;
+
+        public BuscarVentasCompletas(VentasDao ventasDao, VentasRepository.OnResultCallback callback) {
+            this.ventasDao=ventasDao;
+            this.callback=callback;
+        }
+
+        @Override
+        protected List<Venta> doInBackground(Void... voids) {
+            return ventasDao.getPagosCompletos();
+        }
+
+        @Override
+        protected void onPostExecute(List<Venta> ventas) {
+            super.onPostExecute(ventas);
+            callback.onResultVenta(ventas);
+        }
+    }
+
 }

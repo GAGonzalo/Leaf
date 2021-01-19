@@ -85,12 +85,20 @@ public class CrearClienteFragment<ClienteRepository> extends Fragment implements
             if(camposCompletos()){
                 Cliente cliente = new Cliente(null,nombreET.getText().toString(), numeroET.getText().toString(), dniET.getText().toString(), direccion.getText().toString() );
                 clientesRepository.insertCliente(cliente);
+                Toast.makeText(getActivity(), "Cliente creado con éxito.", Toast.LENGTH_LONG).show();
+                clearForms();
             }
             else {
-                clientesRepository.findAllClientes();
-                Toast.makeText(getActivity(), "No se creo el cliente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No se creo el cliente, complete los campos", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void clearForms() {
+        nombreET.setText("");
+        numeroET.setText("");
+        dniET.setText("");
+        direccion.setText("");
     }
 
     private boolean camposCompletos() {
@@ -131,42 +139,43 @@ public class CrearClienteFragment<ClienteRepository> extends Fragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data != null){
+            Uri uri = data.getData();
+            if (uri != null) {
+                if (requestCode == PICK_CONTACT) {
 
-        Uri uri = data.getData();
-        if (uri != null) {
-            if (requestCode == PICK_CONTACT) {
+                    String numero=null;
+                    String nombre;
 
-                String numero=null;
-                String nombre;
+                    Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
 
-                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
 
-                if (cursor.moveToFirst()) {
-                    String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                        String tieneNumero = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
-                    String tieneNumero = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                        //Obtener nombre del contacto
+                        nombre = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                    //Obtener nombre del contacto
-                    nombre = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        //Verificar que sea un contacto con numero de telefono
+                        if (tieneNumero.equalsIgnoreCase("1")) {
 
-                    //Verificar que sea un contacto con numero de telefono
-                    if (tieneNumero.equalsIgnoreCase("1")) {
+                            // Obtener Numero de telefono
+                            Cursor telefonos = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                            if (telefonos.moveToFirst()) {
+                                numero = telefonos.getString(telefonos.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                telefonos.close();
+                            }
 
-                        // Obtener Numero de telefono
-                        Cursor telefonos = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                        if (telefonos.moveToFirst()) {
-                            numero = telefonos.getString(telefonos.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                            telefonos.close();
                         }
 
+                        nombreET.setText(nombre);
+                        numeroET.setText(numero);
                     }
+                    cursor.close();
 
-                    nombreET.setText(nombre);
-                    numeroET.setText(numero);
                 }
-                cursor.close();
-
             }
         }
     }
